@@ -1,0 +1,30 @@
+{
+  "name": "cloudfunctions",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --config webpack.config.js && cp package.json dist",
+    "deploy": "yarn build && concurrently yarn:deploy-*",
+    "deploy-sendemail": "gcloud functions deploy sendEmail --runtime nodejs10 --trigger-topic sendemail --source ./dist/",
+    "deploy-userWelcomeEmail": "gcloud functions deploy userWelcomeEmail --runtime nodejs10 --trigger-topic userWelcomeEmail --source ./dist/",
+    "deploy-handleNewUserRegistration": "gcloud functions deploy handleNewUserRegistration --runtime nodejs10 --trigger-topic newuser --source ./dist/"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/node": "^12.6.8",
+    "babel-loader": "^8.0.6",
+    "concurrently": "^4.1.1",
+    "ts-loader": "^6.0.4",
+    "typescript": "^3.5.3",
+    "webpack": "^4.37.0",
+    "webpack-cli": "^3.3.6",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "@google-cloud/pubsub": "^0.30.1",
+    "@sendgrid/mail": "^6.4.0"
+  }
+}
