@@ -1,5 +1,7 @@
 export {
   sendEmail,
   userWelcomeEmail,
-  handleNewUserRegistration
+  handleNewUserRegistration,
+  handleCallback,
+  generateTestData
 } from "./functions";
